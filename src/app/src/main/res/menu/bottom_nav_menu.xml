@@ -8,6 +8,7 @@
     <item
         android:id="@+id/fav"
         android:icon="@drawable/baseline_favorite_border_24"
+        android:onClick="onClickFavorites"
         android:title="@string/nav_fav" />
     <item
         android:id="@+id/add"

@@ -1,8 +1,10 @@
 package com.apm.monsteraltech
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.apm.monsteraltech.R
@@ -55,5 +57,10 @@ class activity : AppCompatActivity() {
         var fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
+    }
+
+    fun onClickFavorites(view: View) {
+        val intent = Intent(this, FavoritesActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -1,6 +1,7 @@
 package com.apm.monsteraltech.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.widget.Toast
 import com.apm.monsteraltech.databinding.ActivityLoginBinding
 
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.activity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -99,18 +101,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
         // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
+        moveToMainMenu()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+    private fun moveToMainMenu() {
+        val intent = Intent(this, activity::class.java)
+        startActivity(intent)
     }
 }
 
@@ -127,4 +127,6 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
+
+
 }
