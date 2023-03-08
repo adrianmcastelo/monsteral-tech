@@ -13,4 +13,6 @@ import com.apm.monsteraltech.ui.home.HomeFragment
 import com.apm.monsteraltech.ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
+
+
 }
