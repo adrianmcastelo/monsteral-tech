@@ -26,8 +26,8 @@
     <!-- Strings realted to favorites -->
     <string name="title_activity_favorites">Tus productos favoritos</string>
     <string name="action_settings">Settings</string>
-
-    <!-- Strings realted to favorites -->
-
+    <string name="title_activity_search">SearchActivity</string>
+    <!-- Strings realted to search -->
+    <string name="search_filter_title">Filters</string>
 
 </resources>
