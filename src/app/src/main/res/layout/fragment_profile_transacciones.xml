@@ -95,7 +95,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:="#6e9723"
                     android:text="Productos"
                     android:layout_marginRight="17dp" />
 
