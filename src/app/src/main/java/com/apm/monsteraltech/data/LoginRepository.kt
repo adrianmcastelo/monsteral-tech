@@ -45,8 +45,6 @@ class LoginRepository(val dataSource: LoginDataSource) : AppCompatActivity() {
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
         this.user = loggedInUser
-        val intent = Intent(this, activity::class.java)
-        startActivity(intent)
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
