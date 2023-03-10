@@ -15,6 +15,9 @@
             android:name=".AddProduct"
             android:exported="false" />
         <activity
+            android:name=".ProductDetail"
+            android:exported="false" />
+        <activity
             android:name=".SearchActivity"
             android:exported="false"
             android:label="@string/title_activity_search"
