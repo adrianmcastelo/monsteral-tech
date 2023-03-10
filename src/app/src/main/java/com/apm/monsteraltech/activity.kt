@@ -59,8 +59,4 @@ class activity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    fun onClickFavorites(view: View) {
-        val intent = Intent(this, FavoritesActivity::class.java)
-        startActivity(intent)
-    }
 }
