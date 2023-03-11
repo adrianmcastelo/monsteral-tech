@@ -30,7 +30,8 @@ class ProfileFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        requireFragmentManager().beginTransaction().replace(R.id.contenedor_profile, ProfileProductsFragment()).commit()
+
+        parentFragmentManager.beginTransaction().replace(R.id.contenedor_profile, ProfileProductsFragment()).commit()
 
         // Inicializa los botones
         btnproducts = view.findViewById(R.id.products_button)
@@ -38,7 +39,7 @@ class ProfileFragment : Fragment() {
 
         // Crea una instancia del OnClickListener para reutilizar la misma lógica en ambos botones
         val onClickListener = View.OnClickListener { view ->
-            var transaction = requireFragmentManager().beginTransaction()
+            var transaction = parentFragmentManager.beginTransaction()
             when(view.id){
                 R.id.products_button -> {
                     transaction.replace(R.id.contenedor_profile, ProfileProductsFragment()).commit()
