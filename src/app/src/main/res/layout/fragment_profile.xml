@@ -1,4 +1,5 @@
 <RelativeLayout
+    android:id="@+id/products_profile"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -35,6 +36,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="48dp"
                 android:text="Nombre del usuario"
+                style="@style/Profile_name"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:text="A coruña"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -55,6 +57,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:text="Compras: 5"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -65,11 +68,38 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:text="Ventas: 8"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="22dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Productos"
+                android:layout_marginRight="16dp"
+                android:id="@+id/products_button"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/transacciones_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Transacciones"
+                android:onClick="onClick"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <ScrollView
@@ -80,150 +110,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Botones -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp">
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Productos"
-                    android:layout_marginRight="17dp" />
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Transacciones"
-                    android:layout_marginLeft="17px" />
-
-            </LinearLayout>
-
-            <!-- A CardView that contains a TextView -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#ecd6b6">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/product_image_imageview1"
-                        android:layout_width="143dp"
-                        android:layout_height="200dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/baseline_person_outline_24" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/product_name_textview1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Product Name"
-                            android:textSize="18sp"
-
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/product_description_textview2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Product description"
-                            app:cardBackgroundColor="#ecd6b6"/>
-
-                        <TextView
-                            android:id="@+id/product_price_textview2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|end"
-                            android:text="19.99€" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- A CardView that contains a TextView -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#ecd6b6">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/product_image_imageview"
-                        android:layout_width="143dp"
-                        android:layout_height="200dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/baseline_person_outline_24" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/product_name_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Product Name"
-                            android:textSize="18sp"
-
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/product_description_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Product description" />
-
-                        <TextView
-                            android:id="@+id/product_price_textview"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|end"
-                            android:text="19.99€" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+            android:orientation="vertical"
+            android:id="@+id/contenedor_profile">
 
         </LinearLayout>
 

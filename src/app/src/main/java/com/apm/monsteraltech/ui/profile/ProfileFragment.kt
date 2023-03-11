@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.apm.monsteraltech.R
+import androidx.fragment.app.FragmentManager
+
+import com.apm.monsteraltech.ui.home.HomeFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,22 +24,36 @@ private const val ARG_PARAM2 = "param2"
 class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
-    private var param2: String? = null
+    private var btnproducts: Button? = null
+    private var btnTransactions: Button? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        requireFragmentManager().beginTransaction().replace(R.id.contenedor_profile, ProfileProductsFragment()).commit()
+
+        // Inicializa los botones
+        btnproducts = view.findViewById(R.id.products_button)
+        btnTransactions = view.findViewById(R.id.transacciones_button)
+
+        // Crea una instancia del OnClickListener para reutilizar la misma lógica en ambos botones
+        val onClickListener = View.OnClickListener { view ->
+            var transaction = requireFragmentManager().beginTransaction()
+            when(view.id){
+                R.id.products_button -> {
+                    transaction.replace(R.id.contenedor_profile, ProfileProductsFragment()).commit()
+                }
+                R.id.transacciones_button -> {
+                    transaction.replace(R.id.contenedor_profile, ProfileTransactionsFragment()).commit()
+                }
+            }
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        // Asigna el mismo OnClickListener a los dos botones
+        btnproducts?.setOnClickListener(onClickListener)
+        btnTransactions?.setOnClickListener(onClickListener)
+
+        return view
     }
 
     companion object {

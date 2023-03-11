@@ -13,10 +13,10 @@ import com.apm.monsteraltech.ui.add.AddFragment
 import com.apm.monsteraltech.ui.fav.FavFragment
 import com.apm.monsteraltech.ui.home.HomeFragment
 import com.apm.monsteraltech.ui.profile.ProfileFragment
-
 class activity : AppCompatActivity() {
 
     private lateinit var binding: FragmentMainActivityBinding
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +53,8 @@ class activity : AppCompatActivity() {
             true // Devuelve true si el elemento ha sido seleccionado correctamente, o false si no ha sido seleccionado
         }
     }
+
+
     private fun replaceFragment(fragment : Fragment){
         var fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)
