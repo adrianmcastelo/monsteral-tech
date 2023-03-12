@@ -21,12 +21,12 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
 
         <TextView
-            android:id="@+id/product_name_textview"
+            android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/product_image_imageview"
@@ -38,10 +38,22 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/product_price_textview"
+            android:id="@+id/product_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_name_textview"
+            android:layout_below="@+id/product_name"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/product_image_imageview"
+            android:text="Product owner"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_owner"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/product_image_imageview"
@@ -50,10 +62,10 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/product_quantity_textview"
+            android:id="@+id/product_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_price_textview"
+            android:layout_below="@+id/product_price"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/product_image_imageview"

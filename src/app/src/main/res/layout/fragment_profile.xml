@@ -107,13 +107,10 @@
         android:layout_height="match_parent"
         android:layout_below="@id/header_layout">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/contenedor_profile">
-
-        </LinearLayout>
+            android:layout_height="match_parent" />
 
     </ScrollView>
 
