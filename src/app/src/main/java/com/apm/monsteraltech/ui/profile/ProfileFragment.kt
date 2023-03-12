@@ -1,11 +1,16 @@
 package com.apm.monsteraltech.ui.profile
 
+import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
@@ -14,6 +19,7 @@ class ProfileFragment : Fragment() {
     private lateinit var btnProducts: Button
     private lateinit var btnTransactions: Button
     private lateinit var recyclerView: RecyclerView
+    private var isProductsSelected = true
 
     private val transactionList: ArrayList<Transactions> = arrayListOf()
 
@@ -29,13 +35,24 @@ class ProfileFragment : Fragment() {
 
         // Inicialmente muestra la lista de productos
         showProductList()
+        btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
+        btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
 
         // Crea una instancia del OnClickListener para reutilizar la misma lógica en ambos botones
         val onClickListener = View.OnClickListener { view ->
-            when(view.id){
-                R.id.products_button -> showProductList()
-                R.id.transacciones_button -> showTransactionList()
+            when (view.id) {
+                R.id.products_button -> {
+                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
+                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+                    showProductList()
+                }
+                R.id.transacciones_button -> {
+                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
+                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+                    showTransactionList()
+                }
             }
+
         }
 
         // Asigna el OnClickListener a los botones
@@ -75,4 +92,5 @@ class ProfileFragment : Fragment() {
 
         return productList
     }
+
 }

@@ -89,6 +89,7 @@
                 android:text="Productos"
                 android:layout_marginRight="16dp"
                 android:id="@+id/products_button"
+                android:textColor="@android:color/white"
                 android:onClick="onClick"/>
 
             <Button
@@ -97,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Transacciones"
+                android:textColor="@android:color/white"
                 android:onClick="onClick"/>
 
         </LinearLayout>
