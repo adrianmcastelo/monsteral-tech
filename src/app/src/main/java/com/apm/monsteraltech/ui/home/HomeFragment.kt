@@ -1,33 +1,24 @@
 package com.apm.monsteraltech.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
+
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var filterRecycleView: RecyclerView
+    private lateinit var productRecycleView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +26,52 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        var view : View = inflater.inflate(R.layout.fragment_home, container, false)
+
+        // Necesitamos configurar un Layout al Recycler para que funcione
+        var adapter = AdapterFilters(getFilterList())
+
+        filterRecycleView = view.findViewById(R.id.RecyclerViewFilters)
+        filterRecycleView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        filterRecycleView.adapter = adapter
+
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+
+        productRecycleView = view.findViewById(R.id.RecyclerViewProducts)
+        productRecycleView.adapter = AdapterProductsHome(getProductList())
+        productRecycleView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        productRecycleView.layoutManager = layoutManager
+
+        adapter.setOnItemClickListener(object: AdapterFilters.onItemClickedListener{
+            override fun onItemClick(position: Int) {
+                val selectedFilter = filterRecycleView.getChildAt(position)
+                selectedFilter.isSelected = true
+            }
+        })
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun getFilterList(): ArrayList<Filter> {
+        val filterList: ArrayList<Filter> = arrayListOf()
+
+        filterList.add(Filter("Choches"))
+        filterList.add(Filter("Casas"))
+        filterList.add(Filter("Electrodomésticos"))
+        filterList.add(Filter("Muebles"))
+        return filterList
+    }
+
+    private fun getProductList(): ArrayList<Product> {
+        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
+        val productList: ArrayList<Product> = arrayListOf()
+
+        // Agrega algunos productos a la lista para mockear la respuesta
+        for (i in 0 until 10) {
+            val product = Product("Producto $i","", "Owner", "99.99")
+            productList.add(product)
+        }
+
+        return productList
     }
 }
