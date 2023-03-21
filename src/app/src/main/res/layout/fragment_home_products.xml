@@ -8,6 +8,7 @@
     app:cardBackgroundColor="#fff"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
+    android:clickable="true"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout

@@ -1,3 +1,3 @@
 package com.apm.monsteraltech.ui.home
 
-class Product(val productName: String, val image: String, val owner: String, val price: String)
+class Product(val productName: String, val image: String, val owner: String, val price: String, val category: String)

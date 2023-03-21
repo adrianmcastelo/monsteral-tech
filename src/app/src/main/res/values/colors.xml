@@ -10,6 +10,6 @@
     <color name="filter_button_text_color">#FF000000</color>
     <color name="filter_button_pressed_color">#AA6200EE</color>
     <color name="filter_button_selected_color">#FF6200EE</color>
-    <color name="filter_button_color">#00000000</color>
+    <color name="filter_button_color">#FFBB86FC</color>
 
 </resources>

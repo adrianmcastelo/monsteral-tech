@@ -6,6 +6,8 @@
         android:id="@+id/button_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:background="@drawable/filter_button_background"
         android:layout_marginRight="16dp"/>
 
 </RelativeLayout>
