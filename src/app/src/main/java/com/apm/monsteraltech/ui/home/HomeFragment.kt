@@ -1,6 +1,7 @@
 package com.apm.monsteraltech.ui.home
 
 import AdapterFilters
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
         val adapterFilter = AdapterFilters(getFilterList())
         this.productsList = getProductList()
 
+        //Cada vez que pulsemos una letra en el buscador empezará a filtrar
         val searchView: SearchView = view.findViewById(R.id.searchView)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -43,10 +45,12 @@ class HomeFragment : Fragment() {
             }
         })
 
+        //Inicializamos la vista de filtros
         filterRecyclerView = view.findViewById(R.id.RecyclerViewFilters)
         filterRecyclerView.adapter = adapterFilter
         filterRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+        //Inicializamos la vista de los productos y hacemos que se muestren en filas de 2
         val layoutManager = GridLayoutManager(requireContext(), 2)
         this.adapterProduct = AdapterProductsHome(productsList)
         productRecyclerView = view.findViewById(R.id.RecyclerViewProducts)
@@ -61,16 +65,21 @@ class HomeFragment : Fragment() {
             }
         })
 
+        //LLamamos a la actividad producto detail
         adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener{
             override fun onItemClick(position: Int) {
                 val selectedFilter = productRecyclerView.getChildAt(position)
                 selectedFilter.isSelected = true
-                Toast.makeText(requireContext(),adapterProduct.getProduct(position)?.category,Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)
+                //TODO: ver que información es necesario pasarle
+                intent.putExtra("Product",adapterProduct.getProduct(position)?.productName);
+                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+                startActivity(intent)
             }
         })
         return view
     }
-
+    // filtramos por nombre de la categoría seleccionada
     private fun filterCategory(text: String) {
         val filteredlist = ArrayList<Product?>()
         for (item in productsList) {
@@ -87,7 +96,12 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // filtramos por nombre del producto destacado
+    //TODO: Si hay una categoría seleccionada tendría que buscar solo sobre esos objetos
     private fun filterName(text: String) {
+        // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total
+        // de productos que podamos obtener
+
         val filteredlist = ArrayList<Product?>()
         for (item in productsList) {
             if (item != null) {
@@ -103,6 +117,8 @@ class HomeFragment : Fragment() {
         }
     }
     private fun getFilterList(): ArrayList<Filter> {
+        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
+
         val filterList: ArrayList<Filter> = arrayListOf()
 
         filterList.add(Filter("Choches"))
