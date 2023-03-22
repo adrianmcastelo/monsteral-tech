@@ -1,9 +1,7 @@
 package com.apm.monsteraltech.ui.profile
 
 import android.content.Context
-import android.graphics.Color
-import android.provider.Settings
-import android.provider.Settings.Global.getString
+import android.content.Intent
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
@@ -13,10 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
 
-class AdapterTransactionsData (private val transactionList: ArrayList<Transactions>): RecyclerView.Adapter<AdapterTransactionsData.ViewHolder>() {
+class AdapterTransactionsData(
+    private val transactionList: ArrayList<Transactions>
+): RecyclerView.Adapter<AdapterTransactionsData.ViewHolder>() {
 
 
     class ViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
@@ -32,6 +34,8 @@ class AdapterTransactionsData (private val transactionList: ArrayList<Transactio
 
             val userSellerLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
+                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES
+
                 }
 //          Añadir esto si nos interesa cambiar el color una vez pulsado
 /*                override fun updateDrawState(ds: TextPaint) {
@@ -42,16 +46,23 @@ class AdapterTransactionsData (private val transactionList: ArrayList<Transactio
 
             val userCustomerLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
+                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES
                 }
             }
 
             val itemLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
+                    val intent = Intent(widget.context, ProductDetail::class.java)
+                    //TODO: ver que información es necesario pasarle
+                    intent.putExtra("Product",item);
+                    //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+                    widget.context.startActivity(intent)
                 }
             }
 
             val dateLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
+                    //TODO: FALTARIÍA VER SI ESTO TIENE QUE SER UN CLICKABLE Y SI SÍ QUE MUESTRA
                 }
             }
 

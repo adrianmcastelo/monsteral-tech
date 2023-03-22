@@ -1,9 +1,6 @@
 package com.apm.monsteraltech.ui.profile
 
-import android.content.Context
-import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,13 +10,14 @@ import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
 
 class ProfileFragment : Fragment() {
     private lateinit var btnProducts: Button
     private lateinit var btnTransactions: Button
     private lateinit var recyclerView: RecyclerView
-    private var isProductsSelected = true
+    private lateinit var adapterProduct: AdapterProductsData
 
     private val transactionList: ArrayList<Transactions> = arrayListOf()
 
@@ -39,8 +37,8 @@ class ProfileFragment : Fragment() {
         btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
 
         // Crea una instancia del OnClickListener para reutilizar la misma lógica en ambos botones
-        val onClickListener = View.OnClickListener { view ->
-            when (view.id) {
+        val onClickListener = View.OnClickListener { viewRecycle->
+            when (viewRecycle.id) {
                 R.id.products_button -> {
                     btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
                     btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
@@ -52,18 +50,30 @@ class ProfileFragment : Fragment() {
                     showTransactionList()
                 }
             }
-
         }
 
         // Asigna el OnClickListener a los botones
         btnProducts.setOnClickListener(onClickListener)
         btnTransactions.setOnClickListener(onClickListener)
 
+        //LLamamos a la actividad producto detail
+        this.adapterProduct.setOnItemClickListener(object: AdapterProductsData.OnItemClickedListener{
+            override fun onItemClick(position: Int) {
+                recyclerView.getChildAt(position)
+                val intent = Intent(requireContext(), ProductDetail::class.java)
+                //TODO: ver que información es necesario pasarle
+                intent.putExtra("Product", adapterProduct.getProduct(position).productName)
+                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+                startActivity(intent)
+            }
+        })
+
         return view
     }
 
     private fun showProductList() {
-        recyclerView.adapter = AdapterProductsData(getProductList())
+        this.adapterProduct = AdapterProductsData(getProductList())
+        recyclerView.adapter = adapterProduct
     }
 
     private fun showTransactionList() {
