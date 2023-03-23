@@ -1,5 +1,6 @@
 package com.apm.monsteraltech
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -24,4 +25,6 @@ class FavoritesActivity : AppCompatActivity() {
 //                .setAction("Action", null).show()
 //        }
     }
+
+
 }
