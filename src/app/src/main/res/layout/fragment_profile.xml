@@ -88,14 +88,14 @@
             android:layout_marginRight="22dp">
 
             <Button
+                android:id="@+id/products_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Productos"
                 android:layout_marginRight="16dp"
-                android:id="@+id/products_button"
-                android:textColor="@android:color/white"
-                android:onClick="onClick"/>
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="Productos"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/transacciones_button"

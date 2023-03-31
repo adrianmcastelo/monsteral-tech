@@ -1,9 +1,6 @@
 package com.apm.monsteraltech.data
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import com.apm.monsteraltech.activity
 import com.apm.monsteraltech.data.model.LoggedInUser
 
 

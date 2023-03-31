@@ -11,12 +11,12 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
     }
     fun onClickRegister(view: View) {
-        val intent = Intent(this, activity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
     fun onClickCancel(view: View) {
-        val intent = Intent(this, activity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }

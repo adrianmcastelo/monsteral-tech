@@ -34,7 +34,7 @@
     <EditText
         android:id="@+id/passwordRegister"
         android:layout_width="177dp"
-        android:layout_height="22dp"
+        android:layout_height="40dp"
         android:layout_marginStart="117dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="117dp"
@@ -48,7 +48,7 @@
     <EditText
         android:id="@+id/confirmPasswordRegister"
         android:layout_width="177dp"
-        android:layout_height="22dp"
+        android:layout_height="40dp"
         android:layout_marginStart="117dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="117dp"
@@ -65,7 +65,7 @@
         android:layout_width="201dp"
         android:layout_height="40dp"
         android:layout_marginStart="105dp"
-        android:layout_marginTop="198dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="105dp"
         android:layout_marginBottom="60dp"
         android:onClick="onClickRegister"
@@ -78,26 +78,27 @@
     <Button
         android:id="@+id/cancelButtonRegister"
         android:layout_width="100dp"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:layout_marginStart="105dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="212dp"
-        android:layout_marginBottom="20dp"
         android:onClick="onClickCancel"
         android:text="@string/action_cancel"
-        app:layout_constraintBottom_toTopOf="@+id/confirmButtonRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordRegister" />
 
     <EditText
         android:id="@+id/emailRegister"
         android:layout_width="177dp"
-        android:layout_height="22dp"
+        android:layout_height="40dp"
         android:layout_marginStart="117dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="117dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:text="@string/prompt_email"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastNameRegister" />
@@ -105,13 +106,14 @@
     <EditText
         android:id="@+id/confirmEmailRegister"
         android:layout_width="177dp"
-        android:layout_height="22dp"
+        android:layout_height="40dp"
         android:layout_marginStart="117dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="117dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="@string/prompt_confirm_password"
+        android:text="@string/prompt_confirm_email"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailRegister" />

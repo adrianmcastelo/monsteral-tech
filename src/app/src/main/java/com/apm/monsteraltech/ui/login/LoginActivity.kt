@@ -13,12 +13,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
-import com.apm.monsteraltech.FavoritesActivity
 import com.apm.monsteraltech.databinding.ActivityLoginBinding
 
-import com.apm.monsteraltech.R
-import com.apm.monsteraltech.activity
-import com.google.android.material.internal.ContextUtils.getActivity
+import com.apm.monsteraltech.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -30,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setContentView(R.layout.activity_login)
 
         val username = binding.username
         val password = binding.password
@@ -112,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
     private fun moveToMainMenu() {
-        val intent = Intent(this, activity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }
