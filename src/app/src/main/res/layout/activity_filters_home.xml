@@ -1,7 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/activity_action_bar"
+        tools:context=".ActionBarActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -9,29 +17,27 @@
         android:layout_marginTop="16dp">
         <!--filtros-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyclerViewFilters"
+            android:id="@+id/RecyclerViewActivtyFilters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </androidx.core.widget.NestedScrollView>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textSelectedFilter"
         style="@style/Profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="25dp"
-        android:text="Prodcutos destacados"/>
+        android:layout_marginTop="25dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header_layout">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerViewProducts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
     </ScrollView>
 </LinearLayout>

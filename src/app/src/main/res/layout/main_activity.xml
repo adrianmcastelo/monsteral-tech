@@ -5,11 +5,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity">
+    tools:context=".MainActivity">
 
     <include
         android:id="@+id/action_bar"
         layout="@layout/activity_action_bar"
+        tools:context=".ActionBarActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -19,7 +20,6 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintTop_toBottomOf="@id/action_bar">
-
     </FrameLayout>
 
 

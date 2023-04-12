@@ -18,11 +18,19 @@ class ProfileFragment : Fragment() {
     private lateinit var btnTransactions: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsData
-
-    private val transactionList: ArrayList<Transactions> = arrayListOf()
+    private  var productList:  ArrayList<Product>? = null
+    private  var transactionList: ArrayList<Transactions>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        if (savedInstanceState != null) {
+            // Si no estan inicializadas
+            this.productList = (savedInstanceState.getParcelableArrayList<Product>("productList")
+                ?.toList() ?: getProductList()) as ArrayList<Product>
+            this.transactionList = (savedInstanceState.getParcelableArrayList<Transactions>("transactionList")
+                ?.toList() ?: getTransactionList()) as ArrayList<Transactions>
+        }
         // Inicializa los botones
         btnProducts = view.findViewById(R.id.products_button)
         btnTransactions = view.findViewById(R.id.transacciones_button)
@@ -71,21 +79,43 @@ class ProfileFragment : Fragment() {
         return view
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //TODO: revisar si al que haga una transacción en alguna otra actividad esto varia
+        //por lo que a lo mejor esto no renta guardarlo
+        // Only save the Parcelable arrays if they have been initialized
+
+        //Esto lp hacemos en caso de que una de las dos no este inicializada
+        productList?.let {
+            outState.putParcelableArrayList("productList", it)
+        }
+        transactionList?.let {
+            outState.putParcelableArrayList("transactionList", it)
+        }
+    }
+
+
     private fun showProductList() {
-        this.adapterProduct = AdapterProductsData(getProductList())
+        productList = productList ?: getProductList()
+
+        this.adapterProduct = AdapterProductsData(productList!!)
         recyclerView.adapter = adapterProduct
     }
 
     private fun showTransactionList() {
-        recyclerView.adapter = AdapterTransactionsData(getTransactionList())
+        transactionList = transactionList ?: getTransactionList()
+        recyclerView.adapter = AdapterTransactionsData(transactionList!!)
     }
 
-    private fun getTransactionList(): ArrayList<Transactions> {
+    private fun getTransactionList(): ArrayList<Transactions>? {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         // Agrega algunas transacciones a la lista para mockear la respuesta
+
+        val transactionList: ArrayList<Transactions> = arrayListOf()
+
         for (i in 0 until 9) {
             val transaction = Transactions("Usuario $i", "Usuario ${i+1}", "ObjetoX", "xx/yy/zzzz")
-            transactionList.add(transaction)
+            transactionList?.add(transaction)
         }
         return  transactionList
     }

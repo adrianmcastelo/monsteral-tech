@@ -1,6 +1,5 @@
 package com.apm.monsteraltech.ui.home
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 
-class AdapterProductsHome(private var productList: ArrayList<Product?>): RecyclerView.Adapter<AdapterProductsHome.ViewHolder>() {
+class AdapterProductsHome(private var productList: java.util.ArrayList<Product?>): RecyclerView.Adapter<AdapterProductsHome.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
 
     interface OnItemClickedListener{

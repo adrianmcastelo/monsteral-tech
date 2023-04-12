@@ -1,52 +1,56 @@
 package com.apm.monsteraltech.ui.home
 
 import AdapterFilters
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.Searchable
+import com.apm.monsteraltech.ui.home.filters.FiltersHomeActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 
-class HomeFragment : Fragment() {
+@Suppress("DEPRECATION")
+class HomeFragment : Fragment(), Searchable {
     private lateinit var filterRecyclerView: RecyclerView
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productsList: ArrayList<Product?>
     private lateinit var adapterProduct: AdapterProductsHome
 
+    private var context: Context? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        this.context = context
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        if (savedInstanceState != null) {
+            //La no deprecada requiere API 33
+            productsList = savedInstanceState.getParcelableArrayList<Product>("productsList")!!
+        }else{
+            this.productsList = getProductList()
+        }
+
         val view : View = inflater.inflate(R.layout.fragment_home, container, false)
 
         val adapterFilter = AdapterFilters(getFilterList())
-        this.productsList = getProductList()
 
-        //Cada vez que pulsemos una letra en el buscador empezará a filtrar
-        val searchView: SearchView = view.findViewById(R.id.searchView)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                filterName(newText)
-                return false
-            }
-        })
 
         //Inicializamos la vista de filtros
-        filterRecyclerView = view.findViewById(R.id.RecyclerViewFilters)
+        filterRecyclerView = view.findViewById(R.id.RecyclerViewFilters )
         filterRecyclerView.adapter = adapterFilter
         filterRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -59,9 +63,16 @@ class HomeFragment : Fragment() {
 
         adapterFilter.setOnItemClickListener(object: AdapterFilters.OnItemClickedListener{
             override fun onItemClick(position: Int) {
-                val button = adapterFilter.getButton(position)
+/*                val button = adapterFilter.getButton(position)
                 button.isSelected = !button.isSelected
-                filterCategory(adapterFilter.getFilter(position).filterName)
+                filterCategory(adapterFilter.getFilter(position).filterName)*/
+                val sendIntent: Intent = Intent(requireContext(), FiltersHomeActivity::class.java).apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, adapterFilter.getFilter(position).filterName)
+                    type = "text/plain"
+                }
+                startActivity(sendIntent)
+
             }
         })
 
@@ -79,6 +90,13 @@ class HomeFragment : Fragment() {
         })
         return view
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList("productList", productsList)
+    }
+
+
     // filtramos por nombre de la categoría seleccionada
     private fun filterCategory(text: String) {
         val filteredlist = ArrayList<Product?>()
@@ -96,26 +114,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    // filtramos por nombre del producto destacado
-    //TODO: Si hay una categoría seleccionada tendría que buscar solo sobre esos objetos
-    private fun filterName(text: String) {
-        // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total
-        // de productos que podamos obtener
-
-        val filteredlist = ArrayList<Product?>()
-        for (item in productsList) {
-            if (item != null) {
-                if (item.productName.lowercase(Locale.getDefault()).contains(text.lowercase(Locale.getDefault()))) {
-                    filteredlist.add(item)
-                }
-            }
-        }
-        if (filteredlist.isEmpty()) {
-            Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show()
-        } else {
-            adapterProduct.filterList(filteredlist)
-        }
-    }
     private fun getFilterList(): ArrayList<Filter> {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
 
@@ -148,7 +146,7 @@ class HomeFragment : Fragment() {
             "Barbacoa de carbón",
             "Zapatillas deportivas"
         )
-// Agrega algunos productos a la lista para mockear la respuesta
+        // Agrega algunos productos a la lista para mockear la respuesta
         for (i in 0 until 10) {
             val productName = productNames[(0 until productNames.size).random()]
             var productPrice = (1..1000).random().toDouble()
@@ -160,4 +158,29 @@ class HomeFragment : Fragment() {
 
         return productList
     }
+
+    // filtramos por nombre del producto destacado
+    //TODO: Si hay una categoría seleccionada tendría que buscar solo sobre esos objetos
+    override fun onSearch(text: String?) {
+        // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total
+        // de productos que podamos obtener
+
+        val filteredlist = ArrayList<Product?>()
+        for (item in productsList) {
+            if (item != null) {
+                if (text != null) {
+                    if (item.productName.lowercase(Locale.getDefault()).contains(text.lowercase(Locale.getDefault()))) {
+                        filteredlist.add(item)
+                    }
+                }
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            adapterProduct.filterList(filteredlist)
+        }
+    }
+
+
 }
