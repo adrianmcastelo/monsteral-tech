@@ -1,13 +1,11 @@
 package com.apm.monsteraltech
 
-import android.app.Notification.Action
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.View
+import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NavUtils
 import androidx.fragment.app.Fragment
 import com.apm.monsteraltech.databinding.MainActivityBinding
 import com.apm.monsteraltech.ui.add.AddFragment
@@ -15,9 +13,11 @@ import com.apm.monsteraltech.ui.fav.FavFragment
 import com.apm.monsteraltech.ui.home.HomeFragment
 import com.apm.monsteraltech.ui.profile.ProfileFragment
 
+
 class MainActivity : ActionBarActivity(){
     private lateinit var binding: MainActivityBinding
     private var currentFragment: Searchable? = null
+    private var menu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,10 +56,23 @@ class MainActivity : ActionBarActivity(){
 
         // Agregar el icono de hamburguesa para mostrar el menú lateral
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                NavUtils.navigateUpFromSameTask(this)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
+        this.menu = menu
 
         // Obtener una referencia al elemento del menú
         val searchItem = menu?.findItem(R.id.action_search)
@@ -67,7 +80,6 @@ class MainActivity : ActionBarActivity(){
         // Obtener una referencia al SearchView a través del elemento del menú
         val searchView = searchItem?.actionView as SearchView
 
-        searchView.isIconified = false
         // Configurar el comportamiento del SearchView
         searchView.queryHint = "Buscar productos..."
         val queryTextListener = object : SearchView.OnQueryTextListener {
@@ -83,6 +95,9 @@ class MainActivity : ActionBarActivity(){
             }
         }
         searchView.setOnQueryTextListener(queryTextListener)
+
+        searchItem?.isVisible = true
+
         return true
     }
 
@@ -103,6 +118,7 @@ class MainActivity : ActionBarActivity(){
         //Recuperamos el nombre del fragmento para después buscarlo y usarlo para no tener que
         //cargar los datos de cada vez
         val fragmentName = fragment.javaClass.simpleName
+
         val currentFragment = supportFragmentManager.findFragmentByTag(fragmentName)
 
         if (currentFragment == null) {
@@ -117,6 +133,12 @@ class MainActivity : ActionBarActivity(){
             .forEach { fragmentTransaction.hide(it) }
 
         fragmentTransaction.commit()
+
+        // Mostrar u ocultar el SearchView según el fragmento
+        when (fragment) {
+            is HomeFragment -> menu?.findItem(R.id.action_search)?.isVisible = true
+            else -> menu?.findItem(R.id.action_search)?.isVisible = false
+        }
     }
 
 }

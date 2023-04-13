@@ -22,7 +22,8 @@
             android:exported="false" />
         <activity
             android:name=".ProductDetail"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".SearchActivity"
             android:exported="false"
