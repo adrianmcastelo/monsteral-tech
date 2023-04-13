@@ -16,6 +16,7 @@ import android.widget.Toast
 import com.apm.monsteraltech.databinding.ActivityLoginBinding
 
 import com.apm.monsteraltech.MainActivity
+import com.apm.monsteraltech.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
         val username = binding.username
         val password = binding.password
         val login = binding.login
+        val register = binding.register
         val loading = binding.loading
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
@@ -96,6 +98,10 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+
+            register.setOnClickListener {
+                moveToRegister()
+            }
         }
     }
 
@@ -111,7 +117,14 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
+    fun moveToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+    }
 }
+
+
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.
