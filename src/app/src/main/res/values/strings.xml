@@ -35,6 +35,23 @@
     <string name="product_price">Precio: $%1$s</string>
     <string name="search">$%1$s</string>
     <string name="transaction_template">El usuario %1$s vendió a %2$s el artículo %3$s el día %4$s</string>
-
+    <string name="category_prompt">Seleccione una categoría</string>
+    <string name="currency_prompt">Seleccione una moneda</string>
+    <array name="currencies">
+        <item>EUR - Euro</item>
+        <item>USD - Dólar estadounidense</item>
+        <item>GBP - Libra esterlina</item>
+        <item>JPY - Yen japonés</item>
+        <item>CHF - Franco suizo</item>
+        <item>CNY - Yuan chino</item>
+    </array>
+    <array name="categories">
+        <item>Coches</item>
+        <item>Casas</item>
+        <item>Electrodomésticos</item>
+        <item>Muebles</item>
+    </array>
+    <string name="link_1_description">Enlace a página 1</string>
+    <string name="link_2_description">Enlace a página 2</string>
 
 </resources>
