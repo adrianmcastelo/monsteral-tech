@@ -14,10 +14,9 @@ import com.apm.monsteraltech.ui.home.HomeFragment
 import com.apm.monsteraltech.ui.profile.ProfileFragment
 
 
-class MainActivity : ActionBarActivity(){
+class MainActivity() : ActionBarActivity(){
     private lateinit var binding: MainActivityBinding
     private var currentFragment: Searchable? = null
-    private var menu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +53,6 @@ class MainActivity : ActionBarActivity(){
         // Establecer la Toolbar como la ActionBar
         setSupportActionBar(toolbar)
 
-        // Agregar el icono de hamburguesa para mostrar el menú lateral
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 

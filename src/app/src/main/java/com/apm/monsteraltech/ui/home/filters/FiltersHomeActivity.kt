@@ -3,7 +3,13 @@ package com.apm.monsteraltech.ui.home.filters
 import AdapterFilters
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.ActionMenuView
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,20 +19,25 @@ import com.apm.monsteraltech.ui.home.AdapterProductsHome
 import com.apm.monsteraltech.ui.home.Filter
 import com.apm.monsteraltech.ui.home.Product
 
-
-class FiltersHomeActivity : ActionBarActivity() {
+class FiltersHomeActivity() : ActionBarActivity() {
     private lateinit var filterRecyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsHome
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productsList: ArrayList<Product?>
+    private var amvMenu: ActionMenuView? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filters_home)
-        //Activa la flecha para atrás
+
+        invalidateOptionsMenu()
         val adapterFilter = AdapterFilters(getFilterList())
         this.productsList = getProductList()
 
+        val t: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
+        setSupportActionBar(t)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
 
         var textView: TextView = findViewById(R.id.textSelectedFilter)
         textView.text = intent.getStringExtra(Intent.EXTRA_TEXT)
@@ -56,6 +67,51 @@ class FiltersHomeActivity : ActionBarActivity() {
 
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Manejar la navegación hacia atrás aquí
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_search, menu)
+        this.menu = menu
+
+        // Obtener una referencia al elemento del menú
+        val searchItem = menu?.findItem(R.id.action_search)
+
+        // Obtener una referencia al SearchView a través del elemento del menú
+        val searchView = searchItem?.actionView as SearchView
+
+        // Configurar el comportamiento del SearchView
+        searchView.queryHint = "Buscar productos..."
+        val queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Lógica cuando se envía la búsqueda
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                performSearch(newText)
+                return true
+            }
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+
+        searchItem?.isVisible = true
+
+        return true
+    }
+
+    private fun performSearch(newText: String?) {
+        TODO("Not yet implemented")
     }
 
     private fun getProductList(): ArrayList<Product?> {

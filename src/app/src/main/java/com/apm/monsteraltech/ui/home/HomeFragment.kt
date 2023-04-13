@@ -78,8 +78,6 @@ class HomeFragment : Fragment() {
         //LLamamos a la actividad producto detail
         adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener{
             override fun onItemClick(position: Int) {
-                val selectedFilter = productRecyclerView.getChildAt(position)
-                selectedFilter.isSelected = true
                 val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product",adapterProduct.getProduct(position)?.productName);

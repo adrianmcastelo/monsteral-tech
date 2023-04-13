@@ -13,6 +13,7 @@ interface Searchable {
 }
 
 abstract class ActionBarActivity : AppCompatActivity() {
+    var menu: Menu? = null
     lateinit var toolbar:  Toolbar
 
     fun setUpSearchWithBack(){
@@ -28,12 +29,6 @@ abstract class ActionBarActivity : AppCompatActivity() {
         // Establecer la Toolbar como la ActionBar
         setSupportActionBar(toolbar)
     }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_search, menu)
-        return true
-    }
-
-    // Para que el fragmento que lo implemente pueda definir el el método de filtrado
 
 
 }
