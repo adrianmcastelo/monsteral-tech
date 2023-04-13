@@ -89,7 +89,7 @@ class MainActivity : ActionBarActivity(){
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Lógica cuando se cambia el texto de búsqueda
+                // TODO: IMPLEMENTAR BIEN ESTO
                 performSearch(newText)
                 return true
             }
