@@ -1,7 +1,5 @@
 package com.apm.monsteraltech
 
-import android.app.Notification.Action
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar

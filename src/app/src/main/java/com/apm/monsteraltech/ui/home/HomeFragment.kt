@@ -19,7 +19,7 @@ import java.util.*
 
 
 @Suppress("DEPRECATION")
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), Searchable {
     private lateinit var filterRecyclerView: RecyclerView
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productsList: ArrayList<Product?>
@@ -158,7 +158,7 @@ class HomeFragment : Fragment() {
 
     // filtramos por nombre del producto destacado
     //TODO: Si hay una categoría seleccionada tendría que buscar solo sobre esos objetos
-    fun onSearch(text: String?) {
+    override fun onSearch(text: String?) {
         // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total
         // de productos que podamos obtener
 

@@ -116,7 +116,6 @@ class MainActivity() : ActionBarActivity(){
         //Recuperamos el nombre del fragmento para después buscarlo y usarlo para no tener que
         //cargar los datos de cada vez
         val fragmentName = fragment.javaClass.simpleName
-
         val currentFragment = supportFragmentManager.findFragmentByTag(fragmentName)
 
         if (currentFragment == null) {
@@ -134,7 +133,10 @@ class MainActivity() : ActionBarActivity(){
 
         // Mostrar u ocultar el SearchView según el fragmento
         when (fragment) {
-            is HomeFragment -> menu?.findItem(R.id.action_search)?.isVisible = true
+            is HomeFragment ->{
+                this.currentFragment = fragment as Searchable
+                menu?.findItem(R.id.action_search)?.isVisible = true
+            }
             else -> menu?.findItem(R.id.action_search)?.isVisible = false
         }
     }
