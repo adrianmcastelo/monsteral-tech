@@ -10,6 +10,6 @@ class ProductDetail : ActionBarActivity() {
         setContentView(R.layout.activity_product_detail)
         val t: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
         setSupportActionBar(t)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

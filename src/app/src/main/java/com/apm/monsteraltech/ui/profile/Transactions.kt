@@ -6,13 +6,6 @@ import com.apm.monsteraltech.ui.home.Product
 
 class Transactions (val customer: String, val seller: String, val item: String, val date: String):
     Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
-    )
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(customer)
         parcel.writeString(seller)

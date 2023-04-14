@@ -1,10 +1,11 @@
+package com.apm.monsteraltech.ui.home
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.ui.home.Filter
 
 class AdapterFilters(private val filterList: ArrayList<Filter>) : RecyclerView.Adapter<AdapterFilters.ViewHolder>() {
 

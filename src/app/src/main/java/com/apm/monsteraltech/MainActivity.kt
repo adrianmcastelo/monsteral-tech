@@ -14,7 +14,7 @@ import com.apm.monsteraltech.ui.home.HomeFragment
 import com.apm.monsteraltech.ui.profile.ProfileFragment
 
 
-class MainActivity() : ActionBarActivity(){
+class MainActivity : ActionBarActivity(){
     private lateinit var binding: MainActivityBinding
     private var currentFragment: Searchable? = null
 
@@ -94,17 +94,9 @@ class MainActivity() : ActionBarActivity(){
         }
         searchView.setOnQueryTextListener(queryTextListener)
 
-        searchItem?.isVisible = true
+        searchItem.isVisible = true
 
         return true
-    }
-
-    //Como entendemos que el menú va a estar constantemente cargandose no nos interesa que se
-    //destruya cada vez que abramos una nueva activdad por lo que guardamos su instancia
-    //para después poder recuperarla
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
     }
 
     private fun performSearch(query: String?) {
@@ -134,10 +126,12 @@ class MainActivity() : ActionBarActivity(){
         // Mostrar u ocultar el SearchView según el fragmento
         when (fragment) {
             is HomeFragment ->{
-                this.currentFragment = fragment as Searchable
+                this.currentFragment = fragment
                 menu?.findItem(R.id.action_search)?.isVisible = true
             }
-            else -> menu?.findItem(R.id.action_search)?.isVisible = false
+            else -> {
+                menu?.findItem(R.id.action_search)?.isVisible = false
+            }
         }
     }
 

@@ -35,8 +35,7 @@ class LoginActivity : AppCompatActivity() {
         val register = binding.register
         val loading = binding.loading
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -60,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
+                updateUiWithUser()
             }
             setResult(Activity.RESULT_OK)
 
@@ -105,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
+    private fun updateUiWithUser() {
         // TODO : initiate successful logged in experience
         moveToMainMenu()
     }
@@ -118,7 +117,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun moveToRegister() {
+    private fun moveToRegister() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }

@@ -1,6 +1,6 @@
 package com.apm.monsteraltech.ui.home
 
-import AdapterFilters
+import com.apm.monsteraltech.ui.home.AdapterFilters
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -80,7 +80,7 @@ class HomeFragment : Fragment(), Searchable {
             override fun onItemClick(position: Int) {
                 val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product",adapterProduct.getProduct(position)?.productName);
+                intent.putExtra("Product",adapterProduct.getProduct(position)?.productName)
                 //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
                 startActivity(intent)
             }
@@ -91,24 +91,6 @@ class HomeFragment : Fragment(), Searchable {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelableArrayList("productList", productsList)
-    }
-
-
-    // filtramos por nombre de la categoría seleccionada
-    private fun filterCategory(text: String) {
-        val filteredlist = ArrayList<Product?>()
-        for (item in productsList) {
-            if (item != null) {
-                if (item.category.lowercase(Locale.getDefault()).contains(text.lowercase(Locale.getDefault()))) {
-                    filteredlist.add(item)
-                }
-            }
-        }
-        if (filteredlist.isEmpty()) {
-            Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show()
-        } else {
-            adapterProduct.filterList(filteredlist)
-        }
     }
 
     private fun getFilterList(): ArrayList<Filter> {
@@ -146,7 +128,7 @@ class HomeFragment : Fragment(), Searchable {
         // Agrega algunos productos a la lista para mockear la respuesta
         for (i in 0 until 10) {
             val productName = productNames[(0 until productNames.size).random()]
-            var productPrice = (1..1000).random().toDouble()
+            val productPrice = (1..1000).random().toDouble()
             val product = Product(productName, "", "Owner", productPrice.toString(),
                 category[(0 until category.size).random()]
             )
@@ -158,15 +140,15 @@ class HomeFragment : Fragment(), Searchable {
 
     // filtramos por nombre del producto destacado
     //TODO: Si hay una categoría seleccionada tendría que buscar solo sobre esos objetos
-    override fun onSearch(text: String?) {
+    override fun onSearch(query: String?) {
         // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total
         // de productos que podamos obtener
 
         val filteredlist = ArrayList<Product?>()
         for (item in productsList) {
             if (item != null) {
-                if (text != null) {
-                    if (item.productName.lowercase(Locale.getDefault()).contains(text.lowercase(Locale.getDefault()))) {
+                if (query != null) {
+                    if (item.productName.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))) {
                         filteredlist.add(item)
                     }
                 }

@@ -1,12 +1,11 @@
 package com.apm.monsteraltech.ui.home.filters
 
-import AdapterFilters
+import com.apm.monsteraltech.ui.home.AdapterFilters
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ActionMenuView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
@@ -19,12 +18,11 @@ import com.apm.monsteraltech.ui.home.AdapterProductsHome
 import com.apm.monsteraltech.ui.home.Filter
 import com.apm.monsteraltech.ui.home.Product
 
-class FiltersHomeActivity() : ActionBarActivity() {
+class FiltersHomeActivity : ActionBarActivity() {
     private lateinit var filterRecyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsHome
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productsList: ArrayList<Product?>
-    private var amvMenu: ActionMenuView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +37,7 @@ class FiltersHomeActivity() : ActionBarActivity() {
         setSupportActionBar(t)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
 
-        var textView: TextView = findViewById(R.id.textSelectedFilter)
+        val textView: TextView = findViewById(R.id.textSelectedFilter)
         textView.text = intent.getStringExtra(Intent.EXTRA_TEXT)
 
         //Inicializamos la vista de filtros
@@ -105,7 +103,7 @@ class FiltersHomeActivity() : ActionBarActivity() {
         }
         searchView.setOnQueryTextListener(queryTextListener)
 
-        searchItem?.isVisible = true
+        searchItem.isVisible = true
 
         return true
     }
@@ -141,7 +139,7 @@ class FiltersHomeActivity() : ActionBarActivity() {
         // Agrega algunos productos a la lista para mockear la respuesta
         for (i in 0 until 10) {
             val productName = productNames[(0 until productNames.size).random()]
-            var productPrice = (1..1000).random().toDouble()
+            val productPrice = (1..1000).random().toDouble()
             val product = Product(productName, "", "Owner", productPrice.toString(),
                 category[(0 until category.size).random()]
             )

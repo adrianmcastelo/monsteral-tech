@@ -6,12 +6,10 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
@@ -54,7 +52,7 @@ class AdapterTransactionsData(
                 override fun onClick(widget: View) {
                     val intent = Intent(widget.context, ProductDetail::class.java)
                     //TODO: ver que información es necesario pasarle
-                    intent.putExtra("Product",item);
+                    intent.putExtra("Product",item)
                     //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
                     widget.context.startActivity(intent)
                 }
@@ -80,7 +78,7 @@ class AdapterTransactionsData(
             transactionMessageTextView.movementMethod = LinkMovementMethod.getInstance()
         }
 
-        val transactionMessageTextView: TextView = itemView.findViewById(R.id.transaction_message)
+        private val transactionMessageTextView: TextView = itemView.findViewById(R.id.transaction_message)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

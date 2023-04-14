@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
 
+@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
     private lateinit var btnProducts: Button
     private lateinit var btnTransactions: Button
@@ -107,7 +108,7 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = AdapterTransactionsData(transactionList!!)
     }
 
-    private fun getTransactionList(): ArrayList<Transactions>? {
+    private fun getTransactionList(): ArrayList<Transactions> {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         // Agrega algunas transacciones a la lista para mockear la respuesta
 
@@ -115,7 +116,7 @@ class ProfileFragment : Fragment() {
 
         for (i in 0 until 9) {
             val transaction = Transactions("Usuario $i", "Usuario ${i+1}", "ObjetoX", "xx/yy/zzzz")
-            transactionList?.add(transaction)
+            transactionList.add(transaction)
         }
         return  transactionList
     }

@@ -15,10 +15,6 @@ class AddFragment : Fragment() {
     private lateinit var btnSubmit: Button
     private lateinit var btnClear: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,8 +46,8 @@ class AddFragment : Fragment() {
             val tag = button.tag as String
 
             // Agrega el listener a cada botón
-            if (tag != null && tag.startsWith("boton")) {
-                button.setOnClickListener { v -> upLoadIamge(v) }
+            if (tag.startsWith("boton")) {
+                button.setOnClickListener {upLoadIamge() }
             }
         }
 
@@ -60,7 +56,7 @@ class AddFragment : Fragment() {
 
     }
 
-    private fun upLoadIamge(v: View?) {
+    private fun upLoadIamge() {
         Toast.makeText(
             requireContext(),
             "Estamos trabajando en ello",

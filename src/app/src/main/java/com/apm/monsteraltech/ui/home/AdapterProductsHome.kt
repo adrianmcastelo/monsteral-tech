@@ -36,17 +36,8 @@ class AdapterProductsHome(private var productList: java.util.ArrayList<Product?>
         return ViewHolder(view)
     }
 
-    // method for filtering our recyclerview items.
-    fun filterList(filterlist: ArrayList<Product?>) {
-        /*
-        below line is to add our filtered
-        list in our course array list.
-        */
-        productList = filterlist
-        /*
-        below line is to notify our adapter
-        as change in recycler view data.
-        */
+    fun filterList(filterList: ArrayList<Product?>) {
+        productList = filterList
         notifyDataSetChanged()
     }
 

@@ -1,10 +1,8 @@
 package com.apm.monsteraltech
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.appcompat.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 
@@ -14,11 +12,7 @@ interface Searchable {
 
 abstract class ActionBarActivity : AppCompatActivity() {
     var menu: Menu? = null
-    lateinit var toolbar:  Toolbar
-
-    fun setUpSearchWithBack(){
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
-    }
+    private lateinit var toolbar:  Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
