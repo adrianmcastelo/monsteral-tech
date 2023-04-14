@@ -16,17 +16,24 @@ import com.apm.monsteraltech.ui.profile.ProfileFragment
 
 class MainActivity : ActionBarActivity(){
     private lateinit var binding: MainActivityBinding
-    private var currentFragment: Searchable? = null
+    private var searchableFragment: Searchable? = null
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        replaceFragment(HomeFragment())
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // Para la primera vez que lo carga necesitamos esto
+
+        if (savedInstanceState == null) {
+            replaceFragment(HomeFragment())
+        }
+
+
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -100,20 +107,22 @@ class MainActivity : ActionBarActivity(){
     }
 
     private fun performSearch(query: String?) {
-        currentFragment?.onSearch(query)
+        searchableFragment?.onSearch(query)
     }
+
+
 
     private fun replaceFragment(fragment : Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         //Recuperamos el nombre del fragmento para después buscarlo y usarlo para no tener que
         //cargar los datos de cada vez
         val fragmentName = fragment.javaClass.simpleName
-        val currentFragment = supportFragmentManager.findFragmentByTag(fragmentName)
+        currentFragment = supportFragmentManager.findFragmentByTag(fragmentName)
 
         if (currentFragment == null) {
             fragmentTransaction.add(R.id.frame_layout, fragment, fragmentName)
         } else {
-            fragmentTransaction.show(currentFragment)
+            fragmentTransaction.show(currentFragment!!)
         }
 
         //De todos los fragmentos ocultas todos menos el currentFragment

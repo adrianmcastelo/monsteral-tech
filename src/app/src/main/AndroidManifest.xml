@@ -14,6 +14,7 @@
         <activity
             android:name=".ui.home.filters.FiltersHomeActivity"
             android:exported="false"
+            android:screenOrientation="sensor"
             android:parentActivityName=".MainActivity">
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"
@@ -26,6 +27,7 @@
         <activity
             android:name=".ProductDetail"
             android:exported="false"
+            android:screenOrientation="sensor"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -36,21 +38,26 @@
             android:name=".SearchActivity"
             android:exported="false"
             android:label="@string/title_activity_search"
+            android:screenOrientation="sensor"
             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
         <activity
             android:name=".FavoritesActivity"
             android:exported="false"
             android:label="@string/title_activity_favorites"
+            android:screenOrientation="sensor"
             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
+            android:screenOrientation="sensor"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.MonsteralTech.NoActionBar" />
+            android:screenOrientation="sensor"
+            android:theme="@style/Theme.MonsteralTech.NoActionBar"/>
         <activity
             android:name=".ui.login.LoginActivity"
+            android:screenOrientation="sensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

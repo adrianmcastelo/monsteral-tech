@@ -39,7 +39,7 @@ class HomeFragment : Fragment(), Searchable {
 
         if (savedInstanceState != null) {
             //La no deprecada requiere API 33
-            productsList = savedInstanceState.getParcelableArrayList<Product>("productsList")!!
+            productsList = savedInstanceState.getParcelableArrayList<Product>("productList")!!
         }else{
             this.productsList = getProductList()
         }
