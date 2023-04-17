@@ -19,6 +19,10 @@
 * **Facebook**: No se ha mirado nada todavía.
 
 ## Aplicación
+**Prioridad alta**
+* Como no sé en que muy bien que pantalla encajar exactamente esto lo pongo aquí, cuando la aplicación pasa mucho tiempo en segundo plano (por tanto cambia de estado en su ciclo de vida), al volver a entrar nos vuelve a rederigir al login y lo que en verdad queremos es que se guarde la sesión del usuario.
+
+* Al girar el móvil sería conveniente revisar como quedan las pantallas cuando el movil queda en horizontal, sobre todo cuando se trata de pantallas grandes, veease tablets.
 
 ### Pantallas
 
