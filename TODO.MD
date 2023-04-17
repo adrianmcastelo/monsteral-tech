@@ -12,7 +12,7 @@
 
 * **Idealista**: Pendiente de que acepten/rechacen la solicitud para el token (llevamos ya meses esperando por ella, dudo que llegue si no ha llegado ya)
 
-### "APIs autentificación"Conectarse con las Apis de Facebook y Google para iniciar sesión
+### "APIs autentificación"Conectarse con las Apis de Facebook y Google para iniciar sesión (Xaquín)
 
 * **Google**: No se ha mirado nada todavía.
 
@@ -64,7 +64,7 @@
 * Si al final queda esta pantalla habría que mejorarla visualmente y hacer que los botones hicieran algo (vease añadir la imagen, que aunque no se guarden ya podríamos ir definiendo esa lógica).
 #### Profile
 
-**Prioridad Alta**
+**Prioridad Alta** (Xaquín)
 * Crear una pantalla/parametrizar el fragmento que ya existe, para que cuando clickes en el perfil de una persona puedas verlo.
 
 **Prioridad Media**
@@ -72,7 +72,7 @@
 
 #### Filter Advanced (cuando en home pulsas un filtro)
 
-**Prioridad alta**
+**Prioridad alta** (Xaquín)
 * Finalizar la gestión de filtros (No queremos tener un fragmento para cada posible departamente, queremos tener una misma vista parametrizada, hay algunos filtros que serán comunes a todos los departamentos y tendrán una función similar, hay otros que simplemente serán únicos).
 
 **Prioridad media**
