@@ -14,8 +14,6 @@
 
 ### "APIs autentificación"Conectarse con las Apis de Facebook y Google para iniciar sesión (Xaquín)
 
-* **Google**: No se ha mirado nada todavía.
-
 * **Facebook**: No se ha mirado nada todavía.
 
 ## Aplicación
