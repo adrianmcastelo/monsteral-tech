@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.ui.login.LoginActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
@@ -77,8 +80,19 @@ class ProfileFragment : Fragment() {
             }
         })
 
+        view.findViewById<Button>(R.id.log_out).setOnClickListener{
+            signOut()
+        }
         return view
     }
+
+    private fun signOut() {
+        // [START auth_sign_out]
+        Firebase.auth.signOut()
+        val intent: Intent = Intent(requireContext(), LoginActivity::class.java)
+        startActivity(intent)
+    }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

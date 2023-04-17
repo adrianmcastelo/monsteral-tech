@@ -103,6 +103,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Transacciones"
+                android:layout_marginRight="16dp"
+                android:textColor="@android:color/white"
+                android:onClick="onClick"/>
+
+            <Button
+                android:id="@+id/log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="sing out"
                 android:textColor="@android:color/white"
                 android:onClick="onClick"/>
 

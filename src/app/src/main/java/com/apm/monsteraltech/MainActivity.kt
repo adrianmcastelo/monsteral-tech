@@ -28,7 +28,6 @@ class MainActivity : ActionBarActivity(){
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // Para la primera vez que lo carga necesitamos esto
-
         if (savedInstanceState == null) {
             replaceFragment(HomeFragment())
         }
