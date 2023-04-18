@@ -53,5 +53,8 @@
     </array>
     <string name="link_1_description">Enlace a página 1</string>
     <string name="link_2_description">Enlace a página 2</string>
+    <string name="facebook_app_id">561203949493617</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
 
 </resources>

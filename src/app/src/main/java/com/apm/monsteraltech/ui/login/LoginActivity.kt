@@ -2,24 +2,27 @@ package com.apm.monsteraltech.ui.login
 
 import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.apm.monsteraltech.databinding.ActivityLoginBinding
-
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.apm.monsteraltech.MainActivity
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.RegisterActivity
+import com.apm.monsteraltech.databinding.ActivityLoginBinding
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -31,10 +34,14 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
+    private val EMAIL = "email"
+    private lateinit var callbackManager: CallbackManager
+
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
 
@@ -42,6 +49,12 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        callbackManager = CallbackManager.Factory.create()
+
+        val accessToken = AccessToken.getCurrentAccessToken()
+        val isLoggedIn = accessToken != null && !accessToken.isExpired
+
+        if(isLoggedIn) moveToMainMenu()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -138,6 +151,27 @@ class LoginActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
         // [END initialize_auth]
+        val loginButton = findViewById<LoginButton>(R.id.SigUpWithFacebook).also {
+
+            // Configura el registro de devolución de llamada
+            it.registerCallback(callbackManager, object : FacebookCallback<com.facebook.login.LoginResult> {
+                override fun onSuccess(loginResult: com.facebook.login.LoginResult) {
+                    // El usuario inició sesión con éxito, obtén el token de acceso de Facebook y realiza acciones adicionales si es necesario.
+                    this@LoginActivity.moveToMainMenu()
+                }
+
+                override fun onCancel() {
+
+                    // El usuario canceló el inicio de sesión
+                }
+
+                override fun onError(error: FacebookException) {
+                    // Se produjo un error durante el inicio de sesión
+                }
+            })
+        }
+
+
     }
 
     // [START on_start_check_user]
@@ -152,6 +186,7 @@ class LoginActivity : AppCompatActivity() {
     // [START onactivityresult]
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -225,6 +260,8 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
+/*var accessToken = AccessToken.getCurrentAccessToken()
+var isLoggedIn = accessToken != null && !accessToken!!.isExpired*/
 
 
 /**

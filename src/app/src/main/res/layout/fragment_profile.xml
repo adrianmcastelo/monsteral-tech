@@ -117,7 +117,14 @@
                 android:onClick="onClick"/>
 
         </LinearLayout>
+        <com.facebook.login.widget.LoginButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </com.facebook.login.widget.LoginButton>
     </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
