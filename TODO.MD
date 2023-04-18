@@ -12,9 +12,10 @@
 
 * **Idealista**: Pendiente de que acepten/rechacen la solicitud para el token (llevamos ya meses esperando por ella, dudo que llegue si no ha llegado ya)
 
-### "APIs autentificación"Conectarse con las Apis de Facebook y Google para iniciar sesión (Xaquín)
+### "APIs autentificación"Conectarse con las Apis de Facebook y Google para iniciar sesión 
 
-* **Facebook**: No se ha mirado nada todavía.
+* **Facebook**: Aunque parece que funciona el log a veces cuando inicias la aplicación suelta un error E/com.facebook.GraphResponse: {HttpStatus: 400, errorCode: 190, subErrorCode: -1, errorType: OAuthException, errorMessage: Invalid OAuth access token signature.}, el cual convendría revisar en algún momento
+
 
 ## Aplicación
 **Prioridad alta**
