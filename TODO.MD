@@ -26,7 +26,7 @@
 
 #### Login
 
-**Prioridad alta**
+**Prioridad alta** (Daniel)
 * Añadir los botones a las APIs de google y facebook y que se comunique con ellas.
 * Finalizar su diseño, que la disposición de los elementos sea la más próxima a la pantalla final.
 * Habría que ir pensando en como engancharíamos este usuario a la blockChain para registrar sus transacciones, por tanto habría que ver si eso tiene alguna consecuencia a nivel de interfaz o solo sería problema de backend (supongo que en la blockChain tienes una cuenta/ un usuario/un id único, tal vez haya que ver como integrarse con eso)
