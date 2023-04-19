@@ -24,5 +24,10 @@ abstract class ActionBarActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
 
 }

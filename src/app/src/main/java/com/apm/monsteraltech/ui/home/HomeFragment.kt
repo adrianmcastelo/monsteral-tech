@@ -98,7 +98,7 @@ class HomeFragment : Fragment(), Searchable {
 
         val filterList: ArrayList<Filter> = arrayListOf()
 
-        filterList.add(Filter("Choches"))
+        filterList.add(Filter("Coches"))
         filterList.add(Filter("Casas"))
         filterList.add(Filter("Electrodomésticos"))
         filterList.add(Filter("Muebles"))

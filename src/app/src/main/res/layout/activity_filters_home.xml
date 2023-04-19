@@ -11,16 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button_filter"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-        <!--filtros-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyclerViewActivtyFilters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </androidx.core.widget.NestedScrollView>
+        android:layout_marginLeft="10dp"
+        android:text="Filtros"
+        android:drawableEnd="@drawable/filter"
+        android:clickable="true"
+        android:background="@drawable/filter_button_background"
+        android:layout_marginRight="16dp"/>
 
     <TextView
         android:id="@+id/textSelectedFilter"

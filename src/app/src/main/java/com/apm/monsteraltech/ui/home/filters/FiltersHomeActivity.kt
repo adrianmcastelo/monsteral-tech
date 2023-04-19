@@ -1,28 +1,25 @@
 package com.apm.monsteraltech.ui.home.filters
 
-import com.apm.monsteraltech.ui.home.AdapterFilters
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ActionBarActivity
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.ui.home.AdapterProductsHome
-import com.apm.monsteraltech.ui.home.Filter
 import com.apm.monsteraltech.ui.home.Product
 
 class FiltersHomeActivity : ActionBarActivity() {
-    private lateinit var filterRecyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsHome
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productsList: ArrayList<Product?>
+    private var typeOfFilter: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,20 +27,37 @@ class FiltersHomeActivity : ActionBarActivity() {
         setContentView(R.layout.activity_filters_home)
 
         invalidateOptionsMenu()
-        val adapterFilter = AdapterFilters(getFilterList())
         this.productsList = getProductList()
 
         val t: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
         setSupportActionBar(t)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val textView: TextView = findViewById(R.id.textSelectedFilter)
-        textView.text = intent.getStringExtra(Intent.EXTRA_TEXT)
+        typeOfFilter = intent.getStringExtra(Intent.EXTRA_TEXT)
+        textView.text = typeOfFilter
+        var filter = findViewById<Button>(R.id.button_filter)
 
-        //Inicializamos la vista de filtros
-        filterRecyclerView = findViewById(R.id.RecyclerViewActivtyFilters )
-        filterRecyclerView.adapter = adapterFilter
-        filterRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        filter.setOnClickListener {
+            when (this@FiltersHomeActivity.typeOfFilter) {
+                "Coches" -> {
+                    var intent = Intent(this@FiltersHomeActivity, CarFilterActivity::class.java)
+                    startActivity(intent)
+                }
+                "b"-> {
+                    var intent = Intent(this@FiltersHomeActivity, CarFilterActivity::class.java)
+                    startActivity(intent)
+                }
+                "c" -> {
+                    var intent = Intent(this@FiltersHomeActivity, CarFilterActivity::class.java)
+                    startActivity(intent)
+                }
+                else -> {
+                    //TODO: Poner algo aquí
+                }
+            }
+
+        }
 
         val layoutManager = GridLayoutManager(this, 2)
         this.adapterProduct = AdapterProductsHome(productsList)
@@ -51,20 +65,6 @@ class FiltersHomeActivity : ActionBarActivity() {
         productRecyclerView.adapter = this.adapterProduct
         productRecyclerView.layoutManager = layoutManager
 
-        adapterFilter.setOnItemClickListener(object: AdapterFilters.OnItemClickedListener{
-            override fun onItemClick(position: Int) {
-/*                val button = adapterFilter.getButton(position)
-                button.isSelected = !button.isSelected
-                filterCategory(adapterFilter.getFilter(position).filterName)*/
-                val sendIntent: Intent = Intent(this@FiltersHomeActivity, FiltersHomeActivity::class.java).apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, adapterFilter.getFilter(position).filterName)
-                    type = "text/plain"
-                }
-                startActivity(sendIntent)
-
-            }
-        })
         adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@FiltersHomeActivity, com.apm.monsteraltech.ProductDetail::class.java)
@@ -73,17 +73,6 @@ class FiltersHomeActivity : ActionBarActivity() {
                 startActivity(intent)
             }
         })
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                // Manejar la navegación hacia atrás aquí
-                onBackPressed()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -109,11 +98,8 @@ class FiltersHomeActivity : ActionBarActivity() {
                 return true
             }
         }
-
         searchView.setOnQueryTextListener(queryTextListener)
-
         searchItem.isVisible = true
-
         return true
     }
 
@@ -156,17 +142,5 @@ class FiltersHomeActivity : ActionBarActivity() {
         }
 
         return productList
-    }
-
-    private fun getFilterList(): ArrayList<Filter> {
-        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
-
-        val filterList: ArrayList<Filter> = arrayListOf()
-
-        filterList.add(Filter("Filtros"))
-        filterList.add(Filter("Precio"))
-        filterList.add(Filter("Marca y modelo"))
-        filterList.add(Filter("Año"))
-        return filterList
     }
 }

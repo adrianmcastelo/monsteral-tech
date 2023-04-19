@@ -6,4 +6,5 @@
             <item name="android:textStyle">bold</item>
             <!-- Agrega más atributos según tus necesidades -->
         </style>
+
 </resources>
