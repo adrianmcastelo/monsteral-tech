@@ -1,10 +1,8 @@
 package com.apm.monsteraltech
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ComponentActivity
 
 class ProductDetail : ActionBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
