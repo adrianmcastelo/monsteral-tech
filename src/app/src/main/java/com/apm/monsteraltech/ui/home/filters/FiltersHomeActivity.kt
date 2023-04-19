@@ -65,6 +65,14 @@ class FiltersHomeActivity : ActionBarActivity() {
 
             }
         })
+        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@FiltersHomeActivity, com.apm.monsteraltech.ProductDetail::class.java)
+                //TODO: ver que información es necesario pasarle
+                intent.putExtra("Product",adapterProduct.getProduct(position)?.productName)
+                startActivity(intent)
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -101,6 +109,7 @@ class FiltersHomeActivity : ActionBarActivity() {
                 return true
             }
         }
+
         searchView.setOnQueryTextListener(queryTextListener)
 
         searchItem.isVisible = true
