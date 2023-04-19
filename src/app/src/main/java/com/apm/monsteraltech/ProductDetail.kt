@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ComponentActivity
 
 class ProductDetail : ActionBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,13 +15,8 @@ class ProductDetail : ActionBarActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed() // llama a la función onBackPressed() de la actividad para volver a la actividad anterior
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }
