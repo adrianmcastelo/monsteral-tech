@@ -44,12 +44,16 @@ class FiltersHomeActivity : ActionBarActivity() {
                     var intent = Intent(this@FiltersHomeActivity, CarFilterActivity::class.java)
                     startActivity(intent)
                 }
-                "b"-> {
-                    var intent = Intent(this@FiltersHomeActivity, CarFilterActivity::class.java)
+                "Casas"-> {
+                    var intent = Intent(this@FiltersHomeActivity, HouseFilterActivity::class.java)
                     startActivity(intent)
                 }
-                "c" -> {
-                    var intent = Intent(this@FiltersHomeActivity, CarFilterActivity::class.java)
+                "Electrodomésticos" -> {
+                    var intent = Intent(this@FiltersHomeActivity, ElectronicFilterActivity::class.java)
+                    startActivity(intent)
+                }
+                "Muebles" -> {
+                    var intent = Intent(this@FiltersHomeActivity, FurnitureFilterActivity::class.java)
                     startActivity(intent)
                 }
                 else -> {

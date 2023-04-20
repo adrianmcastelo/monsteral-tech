@@ -14,8 +14,37 @@
         android:theme="@style/Theme.MonsteralTech.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.filters.FurnitureFilterActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.filters.FiltersHomeActivity" />
+        </activity>
+        <activity
+            android:name=".ui.home.filters.ElectronicFilterActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.filters.FiltersHomeActivity" />
+        </activity>
+        <activity
+            android:name=".ui.home.filters.HouseFilterActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.filters.FiltersHomeActivity" />
+        </activity>
+        <activity
             android:name=".ui.home.filters.CarFilterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.filters.FiltersHomeActivity" />
+        </activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -54,7 +83,7 @@
         <activity
             android:name=".ProductDetail"
             android:exported="false"
-            android:screenOrientation="sensor"></activity>
+            android:screenOrientation="sensor" />
         <activity
             android:name=".SearchActivity"
             android:exported="false"

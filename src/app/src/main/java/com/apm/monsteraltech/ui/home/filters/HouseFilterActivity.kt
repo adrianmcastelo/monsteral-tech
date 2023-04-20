@@ -7,10 +7,10 @@ import androidx.appcompat.widget.Toolbar
 import com.apm.monsteraltech.ActionBarActivity
 import com.apm.monsteraltech.R
 
-class CarFilterActivity : ActionBarActivity() {
+class HouseFilterActivity : ActionBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_car_filter)
+        setContentView(R.layout.activity_home_filter)
 
         val t: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
         setSupportActionBar(t)

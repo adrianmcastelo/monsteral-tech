@@ -2,6 +2,7 @@ package com.apm.monsteraltech
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
@@ -19,7 +20,6 @@ abstract class ActionBarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_action_bar)
 
         toolbar = findViewById(R.id.my_toolbar)
-
         // Establecer la Toolbar como la ActionBar
         setSupportActionBar(toolbar)
     }
