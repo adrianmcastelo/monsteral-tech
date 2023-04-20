@@ -1,6 +1,5 @@
 package com.apm.monsteraltech.ui.home
 
-import com.apm.monsteraltech.ui.home.AdapterFilters
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.Searchable
-import com.apm.monsteraltech.ui.home.filters.FiltersHomeActivity
+import com.apm.monsteraltech.ui.home.filters.*
 import java.util.*
 
 
@@ -36,42 +35,70 @@ class HomeFragment : Fragment(), Searchable {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val view : View = inflater.inflate(R.layout.fragment_home, container, false)
 
         if (savedInstanceState != null) {
             //La no deprecada requiere API 33
             productsList = savedInstanceState.getParcelableArrayList<Product>("productList")!!
         }else{
-            this.productsList = getProductList()
+            setProdructs(view)
         }
+        setFilters(view)
+        return view
+    }
 
-        val view : View = inflater.inflate(R.layout.fragment_home, container, false)
-
+    fun setFilters(view: View){
         val adapterFilter = AdapterFilters(getFilterList())
-
 
         //Inicializamos la vista de filtros
         filterRecyclerView = view.findViewById(R.id.RecyclerViewFilters )
         filterRecyclerView.adapter = adapterFilter
         filterRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        //Inicializamos la vista de los productos y hacemos que se muestren en filas de 2
+
+        adapterFilter.setOnItemClickListener(object: AdapterFilters.OnItemClickedListener{
+            override fun onItemClick(position: Int) {
+                var sendIntent: Intent
+                when (adapterFilter.getFilter(position).filterName) {
+                    "Coches" -> {
+                        sendIntent = Intent(requireContext(), ShowCarActivity::class.java)
+                        startActivity(sendIntent)
+                    }
+                    "Electrodomésticos"-> {
+                        sendIntent = Intent(requireContext(), ShowElectronicActivity::class.java)
+                        startActivity(sendIntent)
+                    }
+                    "Muebles" -> {
+                        sendIntent = Intent(requireContext(), ShowFurnitureActivity::class.java)
+                        startActivity(sendIntent)
+                    }
+                    "Casas" -> {
+                        sendIntent = Intent(requireContext(), ShowHouseActivity::class.java)
+                        startActivity(sendIntent)
+                    }
+                    else -> {
+                        //TODO: Poner algo aquí
+                    }
+                }
+            }
+        })
+    }
+
+    fun setProdructs(view: View){
+        this.productsList = getProductList()
         val layoutManager = GridLayoutManager(requireContext(), 2)
         this.adapterProduct = AdapterProductsHome(productsList)
         productRecyclerView = view.findViewById(R.id.RecyclerViewProducts)
         productRecyclerView.adapter = this.adapterProduct
         productRecyclerView.layoutManager = layoutManager
 
-        adapterFilter.setOnItemClickListener(object: AdapterFilters.OnItemClickedListener{
+        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {
             override fun onItemClick(position: Int) {
-/*                val button = adapterFilter.getButton(position)
-                button.isSelected = !button.isSelected
-                filterCategory(adapterFilter.getFilter(position).filterName)*/
-                val sendIntent: Intent = Intent(requireContext(), FiltersHomeActivity::class.java).apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, adapterFilter.getFilter(position).filterName)
-                    type = "text/plain"
-                }
-                startActivity(sendIntent)
+                val intent = Intent(requireContext(),
+                    com.apm.monsteraltech.ProductDetail::class.java)
+                //TODO: ver que información es necesario pasarle
+                intent.putExtra("Product", adapterProduct.getProduct(position)?.productName)
+                startActivity(intent)
             }
         })
 
@@ -85,9 +112,7 @@ class HomeFragment : Fragment(), Searchable {
                 startActivity(intent)
             }
         })
-        return view
     }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelableArrayList("productList", productsList)
@@ -139,7 +164,6 @@ class HomeFragment : Fragment(), Searchable {
     }
 
     // filtramos por nombre del producto destacado
-    //TODO: Si hay una categoría seleccionada tendría que buscar solo sobre esos objetos
     override fun onSearch(query: String?) {
         // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total
         // de productos que podamos obtener

@@ -29,5 +29,9 @@ abstract class ActionBarActivity : AppCompatActivity() {
         return true
     }
 
-
+    fun setToolBar(){
+        val t: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
+        setSupportActionBar(t)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 }

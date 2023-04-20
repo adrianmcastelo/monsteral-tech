@@ -100,14 +100,12 @@
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <Button
+        android:id="@+id/applyFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aplicar filtros"
         android:layout_alignParentBottom="true"
         >
     </Button>
-
-
-
 
 </RelativeLayout>

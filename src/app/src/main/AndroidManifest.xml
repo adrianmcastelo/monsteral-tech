@@ -16,34 +16,34 @@
         <activity
             android:name=".ui.home.filters.FurnitureFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            android:parentActivityName=".ui.home.filters.ShowFurnitureActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.FiltersHomeActivity" />
+                android:value=".ui.home.filters.ShowFurnitureActivity" />
         </activity>
         <activity
             android:name=".ui.home.filters.ElectronicFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            android:parentActivityName=".ui.home.filters.ShowElectronicActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.FiltersHomeActivity" />
+                android:value=".ui.home.filters.ShowElectronicActivity" />
         </activity>
         <activity
             android:name=".ui.home.filters.HouseFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            android:parentActivityName=".ui.home.filters.ShowHouseActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.FiltersHomeActivity" />
+                android:value=".ui.home.filters.ShowHouseActivity" />
         </activity>
         <activity
             android:name=".ui.home.filters.CarFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.FiltersHomeActivity">
+            android:parentActivityName=".ui.home.filters.ShowCarActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.FiltersHomeActivity" />
+                android:value=".ui.home.filters.ShowCarActivity" />
         </activity>
 
         <meta-data
@@ -54,7 +54,37 @@
             android:value="@string/facebook_client_token" />
 
         <activity
-            android:name=".ui.home.filters.FiltersHomeActivity"
+            android:name=".ui.home.filters.ShowCarActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensor">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".ui.home.filters.ShowElectronicActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensor">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".ui.home.filters.ShowFurnitureActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensor">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".ui.home.filters.ShowHouseActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="sensor">

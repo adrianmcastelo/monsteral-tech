@@ -3,19 +3,20 @@ package com.apm.monsteraltech.ui.home.filters
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ActionBarActivity
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.ui.home.AdapterProductsHome
 import com.apm.monsteraltech.ui.home.Product
+import java.util.*
+import kotlin.collections.ArrayList
 
-class FiltersHomeActivity : ActionBarActivity() {
+class ShowElectronicActivity : ActionBarActivity() {
     private lateinit var adapterProduct: AdapterProductsHome
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productsList: ArrayList<Product?>
@@ -24,60 +25,24 @@ class FiltersHomeActivity : ActionBarActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_filters_home)
+        setContentView(R.layout.activity_show_electronic)
+        setToolBar()
+        applyFilters()
 
-        invalidateOptionsMenu()
-        this.productsList = getProductList()
-
-        val t: Toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
-        setSupportActionBar(t)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val textView: TextView = findViewById(R.id.textSelectedFilter)
-        typeOfFilter = intent.getStringExtra(Intent.EXTRA_TEXT)
-        textView.text = typeOfFilter
         var filter = findViewById<Button>(R.id.button_filter)
 
         filter.setOnClickListener {
-            when (this@FiltersHomeActivity.typeOfFilter) {
-                "Coches" -> {
-                    var intent = Intent(this@FiltersHomeActivity, CarFilterActivity::class.java)
-                    startActivity(intent)
-                }
-                "Casas"-> {
-                    var intent = Intent(this@FiltersHomeActivity, HouseFilterActivity::class.java)
-                    startActivity(intent)
-                }
-                "Electrodomésticos" -> {
-                    var intent = Intent(this@FiltersHomeActivity, ElectronicFilterActivity::class.java)
-                    startActivity(intent)
-                }
-                "Muebles" -> {
-                    var intent = Intent(this@FiltersHomeActivity, FurnitureFilterActivity::class.java)
-                    startActivity(intent)
-                }
-                else -> {
-                    //TODO: Poner algo aquí
-                }
-            }
-
+            var intent = Intent(this@ShowElectronicActivity, ElectronicFilterActivity::class.java)
+            startActivity(intent)
         }
-
-        val layoutManager = GridLayoutManager(this, 2)
-        this.adapterProduct = AdapterProductsHome(productsList)
-        productRecyclerView = findViewById(R.id.RecyclerViewProducts)
-        productRecyclerView.adapter = this.adapterProduct
-        productRecyclerView.layoutManager = layoutManager
-
-        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener{
-            override fun onItemClick(position: Int) {
-                val intent = Intent(this@FiltersHomeActivity, com.apm.monsteraltech.ProductDetail::class.java)
-                //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product",adapterProduct.getProduct(position)?.productName)
-                startActivity(intent)
-            }
-        })
+        setProdructs()
     }
+
+    fun applyFilters(){
+        val filtros = intent.getParcelableExtra<Filtros>("filtros")
+
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
@@ -107,8 +72,45 @@ class FiltersHomeActivity : ActionBarActivity() {
         return true
     }
 
-    private fun performSearch(newText: String?) {
-        TODO("Not yet implemented")
+    fun setProdructs(){
+        this.productsList = getProductList()
+
+        val layoutManager = GridLayoutManager(this, 2)
+        this.adapterProduct = AdapterProductsHome(productsList)
+        productRecyclerView = findViewById(R.id.RecyclerViewProducts)
+        productRecyclerView.adapter = this.adapterProduct
+        productRecyclerView.layoutManager = layoutManager
+
+        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {
+            override fun onItemClick(position: Int) {
+                val intent = Intent(
+                    this@ShowElectronicActivity,
+                    com.apm.monsteraltech.ProductDetail::class.java
+                )
+                //TODO: ver que información es necesario pasarle
+                intent.putExtra("Product", adapterProduct.getProduct(position)?.productName)
+                startActivity(intent)
+            }
+        })
+    }
+
+    private fun performSearch(query: String?) {
+        val filteredlist = java.util.ArrayList<Product?>()
+        for (item in productsList) {
+            if (item != null) {
+                if (query != null) {
+                    if (item.productName.lowercase(Locale.getDefault()).contains(query.lowercase(
+                            Locale.getDefault()))) {
+                        filteredlist.add(item)
+                    }
+                }
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            Toast.makeText(this@ShowElectronicActivity, "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            adapterProduct.filterList(filteredlist)
+        }
     }
 
     private fun getProductList(): ArrayList<Product?> {
