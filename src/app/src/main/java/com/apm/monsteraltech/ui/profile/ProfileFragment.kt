@@ -7,19 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.ui.login.LoginActivity
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
     private lateinit var btnProducts: Button
     private lateinit var btnTransactions: Button
+    private lateinit var profileLayout: ConstraintLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsData
     private  var productList:  ArrayList<Product>? = null
@@ -80,19 +79,13 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        view.findViewById<Button>(R.id.log_out).setOnClickListener{
-            signOut()
+        profileLayout = view.findViewById(R.id.profile)
+        profileLayout.setOnClickListener {
+            val intent = Intent(requireContext(), DetailedProfileActivity::class.java)
+            startActivity(intent)
         }
         return view
     }
-
-    private fun signOut() {
-        // [START auth_sign_out]
-        Firebase.auth.signOut()
-        val intent: Intent = Intent(requireContext(), LoginActivity::class.java)
-        startActivity(intent)
-    }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
